@@ -7,7 +7,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 const videoElements = document.querySelectorAll('.support__video__wrapper div');
 const videoElements2 = document.querySelectorAll('.school__video__wrapper div');
 
-console.log(videoElements2);
 let player;
 let player2;
 let playerMobile;
@@ -15,8 +14,8 @@ let playerMobile2;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
-    height: '390',
-    width: '640',
+    height: '464',
+    width: '600',
     videoId: '-ggxuolcxeg',
     events: {
         'onReady': onReady
@@ -98,15 +97,25 @@ function onReady2() {
     });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    const videoElements = document.querySelectorAll('.support__video__wrapper div');
-    const video = document.querySelector('.support__video');
-    const langUa = document.querySelector('#ua');
-    const langEn = document.querySelector('#en');
-    const langArrow = document.querySelector('#arrow');
-    const langSwitcher = document.querySelector('.lang-switcher');
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  
+}
 
-    let dropdownItem = [...langSwitcher.querySelectorAll("[data-lang]")];
+window.addEventListener('DOMContentLoaded', () => {
+    const elementsForEN = document.querySelectorAll('.menu__item a, .list__item_name');
+    
+    const select1 = new ItcCustomSelect('#lang-switcher');
+
+    document.querySelector('#lang-switcher').addEventListener('itc.select.change', (e) => {
+        const btn = e.target.querySelector('.itc-select__toggle');
+        if(btn.value) {
+            translateInterface(btn.value);
+            document.cookie = `lang=${btn.value}`;
+        }
+      });
 
     const strings = {
         ua: {
@@ -130,11 +139,13 @@ window.addEventListener('DOMContentLoaded', () => {
             locationValue: "Бахмут, Україна",
             videoBtn: "Терміново",
             schoolTitle: "Підтримати UA Drone School",
-            aboutSchool: "Про школу",
+            aboutSchool: "Про школу:",
             aboutSchoolValue_1: "Безкоштовний 4-х денний курс для військових",
             aboutSchoolValue_2: "Теоретична та технічна підготовка",
             aboutSchoolValue_3: "Практичні заняття",
             aboutSchoolValue_4: "Імітація бойових завдань",
+            schoolFor: "Для кого:",
+            schoolForValue: "2000 військовослужбовців ЗСУ",
             aboutTitle: "Про нас",
             aboutDescr: "Advanced Defence - громадська організація, що займається підготовкою і підвищенням кваліфікації операторів дронів, а також підтримує розробку та виготовлення Українських коптерів та БПЛА. Окрім того, ми займаємося цільовими зборами для підрозділів, що потребують відповідної техніки.",
             accomplishments_1: "військових випускників UA Drone School",
@@ -148,14 +159,14 @@ window.addEventListener('DOMContentLoaded', () => {
             btn: "Donate Now",
             supportTitle: "Winning In The Air Together",
             supportDescr: "We support the Ukrainian production of drones, train Unmanned Aircraft Systems operators, and provide the military with the necessary equipment.",
-            supportSubtitle: "Fundraising One Combat Drone",
+            supportSubtitle: "Fundraising For A Combat Drone",
             goal: "Goal: ",
             specifications: "Specifications:",
             specification_1: "The flight range is up to 10 km",
             specification_2: "Payload is up to 10 kg",
             specification_3: "Thermal imaging camera",
             specification_4: "Drop system for 6 missiles",
-            supportFor: "For the fighters of",
+            supportFor: "FOR WHOM:",
             supportForValue_1: "Group Bravo-2",
             supportForValue_2: "Sofia Company",
             supportForValue_3: "Tor Battalion of the Patrol Police",
@@ -168,42 +179,24 @@ window.addEventListener('DOMContentLoaded', () => {
             aboutSchoolValue_2: "Theoretical and technical training",
             aboutSchoolValue_3: "Practical training",
             aboutSchoolValue_4: "Simulation of combat missions",
+            schoolFor: "FOR WHOM:",
+            schoolForValue: "2,000 service members of the Armed Forces of Ukraine",
             aboutTitle: "About us",
-            aboutDescr: "Advanced Defense is a non-governmental organization engaged in the training and improvement of the qualifications of drone operators, as well as supporting the development and production of Ukrainian copters and UAVs.",
+            aboutDescr: "Advanced Defense is a non-governmental organization engaged in the training and improvement of the qualifications of drone operators, as well as supporting the development and production of Ukrainian copters and UAVs. In addition, we help with targeted collections for units that need the necessary equipment for operating drones.",
             accomplishments_1: "military graduates",
             accomplishments_2: "flight hours",
             accomplishments_3: "volunteers",
-            footerTitle: "“Advanced Defenсe”"
+            footerTitle: "NGO “Advanced Defenсe”"
         }
     }
 
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-      
-    }
     
     if (getCookie('lang')) {
         translateInterface(getCookie('lang'));
+        select1.value = getCookie('lang');
     } else {
         translateInterface('ua');
     }
-
-    // langUa.addEventListener('click', () => {
-        
-    // });
-
-    langSwitcher.addEventListener('click', () => {
-        dropdownItem.forEach(item => {
-            item.addEventListener('click', () => {
-                translateInterface(item.dataset.lang);
-                document.cookie = `lang=${item.dataset.lang}`
-            });
-        });
-        langEn.classList.toggle('disable');
-        langArrow.classList.toggle('arrow_active');
-    });
 
     function getString(lang, key) {
         if (strings[lang].hasOwnProperty(key)) {
@@ -215,6 +208,48 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function translateInterface(language) {
         const stringsPlace = document.querySelectorAll('[data-key]');
+        const supportBtnEn = document.querySelectorAll('.js-support-btn-en');
+        const supportBtnUa = document.querySelectorAll('.js-support-btn-ua');
+        const accordeon = document.querySelectorAll('.accordeon');
+        const enDelete = document.querySelector('#en-delete');
+
+        if (language === 'en') {
+            supportBtnEn.forEach(btn => {
+                btn.addEventListener('click', (event) => {
+                    event.stopImmediatePropagation();
+                    btn.nextElementSibling.classList.toggle('active');
+                    
+                });
+            });
+
+            supportBtnUa.forEach(btn => {
+                btn.style.display = 'none';
+            });
+
+            supportBtnEn.forEach(btn => {
+                btn.style.display = 'flex';
+            });
+
+            elementsForEN.forEach(item => {
+                item.classList.add('en');
+            });
+
+            enDelete.style.display = 'none';
+        } else {
+            elementsForEN.forEach(item => {
+                item.classList.remove('en');
+            });
+            supportBtnEn.forEach(btn => {
+                btn.style.display = 'none';
+            });
+            supportBtnUa.forEach(btn => {
+                btn.style.display = 'flex';
+            });
+            accordeon.forEach(acc => {
+                acc.classList.remove('active');
+            });
+            enDelete.style.display = 'flex';
+        }
     
         for (const string of stringsPlace) {
             string.innerHTML = getString(language, string.getAttribute('data-key'));

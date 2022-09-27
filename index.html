@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drone</title>
     <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/libs/custom-select.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header class="header">
@@ -23,11 +24,16 @@
                     </nav>
                 </div>
                 <div class="header__item">
-                    <div class="lang-switcher">
-                        <a href="#" class="lang-switcher__item" id="ua" data-lang="ua"><img class="lang-switcher__image" src="icons/lang-ua.svg" alt="lang">Укр</a>
-                        <a href="#" class="lang-switcher__item" id="en" data-lang="en"><img class="lang-switcher__image" src="icons/lang-uk.svg" alt="lang">Eng</a>
-                        <img id="arrow" src="icons/arrow.svg" alt="arrow">
+                    <div class="itc-select" id="lang-switcher">
+                        <button type="button" class="itc-select__toggle" name="language" value="ua" data-select="toggle" data-index="0"><img class="lang-switcher__image" src="icons/lang-ua.svg" alt="lang">Укр</button>
+                        <div class="itc-select__dropdown">
+                        <ul class="itc-select__options">
+                            <li class="itc-select__option" data-select="option" data-value="ua" data-index="0"><img class="lang-switcher__image" src="icons/lang-ua.svg" alt="lang">Укр</li>
+                            <li class="itc-select__option" data-select="option" data-value="en" data-index="1"><img class="lang-switcher__image" src="icons/lang-en.svg" alt="lang">Eng</li>
+                        </ul>
+                        </div>
                     </div>
+
                     <a href="#fundraising" class=" header__btn btn" data-key="btn"></a>
                 </div>
             </div>
@@ -43,25 +49,94 @@
                 <div class="support__content">
                     <div class="support__item">
                         <ul class="support__list">
-                            <li class="list__item"><h4 class="list__item_name" data-key="goal"> </h4><div class="list__item_value">$30 000</div></li>
-                            <li class="list__item"><h4 class="list__item_name">Кількість </h4><div class="list__item_value">1</div></li>
-                            <li class="list__item"><h4 class="list__item_name" data-key="specifications"> </h4><div class="list__item_values">
-                                <div class="list__item_value" data-key="specification_1"></div>
-                                <div class="list__item_value" data-key="specification_2"></div>
-                                <div class="list__item_value" data-key="specification_3"></div>
-                                <div class="list__item_value" data-key="specification_4"></div>
-                            </div></li>
-                            <li class="list__item"><h4 class="list__item_name" data-key="supportFor"> </h4><div class="list__item_values">
-                                <div class="list__item_value" data-key="supportForValue_1"></div>
-                                <div class="list__item_value" data-key="supportForValue_2"></div>
-                                <div class="list__item_value" data-key="supportForValue_3"></divh4
-                            </div></li>
-                            <li class="list__item"><h4 class="list__item_name" data-key="location"> </h4>
+                            <li class="list__item">
+                                <h4 class="list__item_name" data-key="goal"></h4>
+                                <div class="list__item_value">$30 000</div>
+                            </li>
+                            <li class="list__item" id="en-delete">
+                                <h4 class="list__item_name">Кількість:</h4>
+                                <div class="list__item_value">1</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name" data-key="specifications"></h4>
+                                <div class="list__item_values">
+                                    <div class="list__item_value" data-key="specification_1"></div>
+                                    <div class="list__item_value" data-key="specification_2"></div>
+                                    <div class="list__item_value" data-key="specification_3"></div>
+                                    <div class="list__item_value" data-key="specification_4"></div>
+                                </div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name" data-key="supportFor"></h4>
+                                <div class="list__item_values">
+                                    <div class="list__item_value" data-key="supportForValue_1"></div>
+                                    <div class="list__item_value" data-key="supportForValue_2"></div>
+                                    <div class="list__item_value" data-key="supportForValue_3"></div>
+                                </div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name" data-key="location"></h4>
                                 <div class="list__item_value" data-key="locationValue"></div>
                             </li>
                         </ul>
                     </div>
-                    <a href="https://send.monobank.ua/jar/5Yi6DgsHwW" class="btn btn_mobile" data-key="btn"></a>
+                    <a href="https://send.monobank.ua/jar/5Yi6DgsHwW" class="btn btn_mobile js-support-btn-ua" data-key="btn" target="_blank"></a>
+                    <button class="btn btn_mobile js-support-btn-en" data-key="btn"></button>
+
+                    <div class="accordeon accordeon-mobile">
+                        <ul class="support__list">
+                            <li class="list__item">
+                                <h4 class="list__item_name">Company details</h4>
+                                <div class="list__item_value">PO "Advanced Defence"</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Bank Name</h4>
+                                <div class="list__item_value">UKRSIBBANK</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Account IBAN, UAH</h4>
+                                <div class="list__item_value">
+                                    UA693510050000026001879154710 <br>
+                                    EDRPOU 44812842
+                                </div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Account IBAN, USD</h4>
+                                <div class="list__item_value">
+                                    UA363510050000026004879154717 <br>
+                                    EDRPOU 44812842
+                                </div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Account IBAN, EUR</h4>
+                                <div class="list__item_value">
+                                    UA793510050000026007879154714 <br>
+                                    EDRPOU 44812842
+                                </div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">PayPal</h4>
+                                <a href="mailto:info@advanceddefence.org" class="list__item_value">info@advanceddefence.org</a>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Monobank link</h4>
+                                <div class="list__item_value"><a href="https://send.monobank.ua/jar/5Yi6DgsHwW" target="_blank">https://send.monobank.ua/jar/5Yi6DgsHwW</a></div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Card Number Monobank</h4>
+                                <div class="list__item_value">5375411201393456</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Bitcoin</h4>
+                                <div class="list__item_value">bc1qazs6qzdeqq63cs0ud52qnftzpwx5u6cdm88t2d</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Etherum</h4>
+                                <div class="list__item_value">0x700529D5686055BFBDE5365735f88977A6A742dA</div>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div class="support__item">
                         <div class="support__video__wrapper">
                             <div class="support__dot_yellow_small_1"></div>
@@ -77,7 +152,62 @@
                         </div>
                     </div>
                 </div>
-                <a href="https://send.monobank.ua/jar/5Yi6DgsHwW" class="btn support__btn" data-key="btn"></a>
+                <a href="https://send.monobank.ua/jar/5Yi6DgsHwW" class="btn support__btn js-support-btn-ua" data-key="btn" target="_blank"></a>
+                <button class="btn support__btn js-support-btn-en" data-key="btn"></button>
+
+                <div class="accordeon">
+                    <ul class="support__list">
+                        <li class="list__item">
+                            <h4 class="list__item_name">Company details</h4>
+                            <div class="list__item_value">PO "Advanced Defence"</div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Bank Name</h4>
+                            <div class="list__item_value">UKRSIBBANK</div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Account IBAN, UAH</h4>
+                            <div class="list__item_value">
+                                UA693510050000026001879154710 <br>
+                                EDRPOU 44812842
+                            </div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Account IBAN, USD</h4>
+                            <div class="list__item_value">
+                                UA363510050000026004879154717 <br>
+                                EDRPOU 44812842
+                            </div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Account IBAN, EUR</h4>
+                            <div class="list__item_value">
+                                UA793510050000026007879154714 <br>
+                                EDRPOU 44812842
+                            </div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">PayPal</h4>
+                            <a href="mailto:info@advanceddefence.org" class="list__item_value">info@advanceddefence.org</a>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Monobank link</h4>
+                            <div class="list__item_value"><a href="https://send.monobank.ua/jar/5Yi6DgsHwW" target="_blank">https://send.monobank.ua/jar/5Yi6DgsHwW</a></div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Card Number Monobank</h4>
+                            <div class="list__item_value">5375411201393456</div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Bitcoin</h4>
+                            <div class="list__item_value">bc1qazs6qzdeqq63cs0ud52qnftzpwx5u6cdm88t2d</div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Etherum</h4>
+                            <div class="list__item_value">0x700529D5686055BFBDE5365735f88977A6A742dA</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -98,25 +228,91 @@
                             <div id="playerMobile2" class="school__video_mobile school__video"></div>
                         </div>
                     </div>
-                <a href="https://send.monobank.ua/jar/2f98y1M3Gr" class="btn btn_mobile" data-key="btn"></a>
+                    <a href="https://send.monobank.ua/jar/2f98y1M3Gr" class="btn btn_mobile js-support-btn-ua" data-key="btn" target="_blank"></a>
+                    <button class="btn btn_mobile js-support-btn-en" data-key="btn"></button>
+                    
+                    <div class="accordeon accordeon-mobile school-accordeon">
+                        <ul class="support__list">
+                            <li class="list__item">
+                                <h4 class="list__item_name">Company details</h4>
+                                <div class="list__item_value">PO "Advanced Defence"</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Bank Name</h4>
+                                <div class="list__item_value">UKRSIBBANK</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Account IBAN, UAH</h4>
+                                <div class="list__item_value">
+                                    UA693510050000026001879154710 <br>
+                                    EDRPOU 44812842
+                                </div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Monobank link</h4>
+                                <div class="list__item_value"><a href="https://send.monobank.ua/jar/2f98y1M3Gr" target="_blank">https://send.monobank.ua/jar/2f98y1M3Gr</a></div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name">Card Number Monobank</h4>
+                                <div class="list__item_value">5375 4112 0060 0778</div>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div class="school__item">
                         <ul class="school__list">
-                            <li class="list__item"><h4 class="list__item_name" data-key="goal"></h4><div class="list__item_value">$20 000</div></li>
-                            <li class="list__item"><h4 class="list__item_name" data-key="aboutSchool"> </h4><div class="list__item_values">
-                                <div class="list__item_value" data-key="aboutSchoolValue_1"></div>
-                                <div class="list__item_value" data-key="aboutSchoolValue_2"></div>
-                                <div class="list__item_value" data-key="aboutSchoolValue_3"></div>
-                                <div class="list__item_value" data-key="aboutSchoolValue_4"></div>
-                            </div></li>
-                            <li class="list__item"><h4 class="list__item_name">Для кого: </h4><div class="list__item_values">
-                                <div class="list__item_value">2000 військовослужбовців ЗСУ</div>
-                                <div class="list__item_value">Рота Софія</div>
-                                <div class="list__item_value">Батальон Тор патрульної поліції</div>
-                            </div></li>
+                            <li class="list__item">
+                                <h4 class="list__item_name" data-key="goal"></h4>
+                                <div class="list__item_value">$20 000</div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name" data-key="aboutSchool"></h4>
+                                <div class="list__item_values">
+                                    <div class="list__item_value" data-key="aboutSchoolValue_1"></div>
+                                    <div class="list__item_value" data-key="aboutSchoolValue_2"></div>
+                                    <div class="list__item_value" data-key="aboutSchoolValue_3"></div>
+                                    <div class="list__item_value" data-key="aboutSchoolValue_4"></div>
+                                </div>
+                            </li>
+                            <li class="list__item">
+                                <h4 class="list__item_name" data-key="schoolFor"></h4>
+                                <div class="list__item_values">
+                                    <div class="list__item_value" data-key="schoolForValue"></div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <a href="https://send.monobank.ua/jar/2f98y1M3Gr" class="btn school__btn" data-key="btn"></a>
+                <a href="https://send.monobank.ua/jar/2f98y1M3Gr" class="btn school__btn js-support-btn-ua" data-key="btn" target="_blank"></a>
+                <button class="btn school__btn js-support-btn-en" data-key="btn"></button>
+
+                <div class="accordeon">
+                    <ul class="support__list">
+                        <li class="list__item">
+                            <h4 class="list__item_name">Company details</h4>
+                            <div class="list__item_value">PO "Advanced Defence"</div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Bank Name</h4>
+                            <div class="list__item_value">UKRSIBBANK</div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Account IBAN, UAH</h4>
+                            <div class="list__item_value">
+                                UA693510050000026001879154710 <br>
+                                EDRPOU 44812842
+                            </div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Monobank link</h4>
+                            <div class="list__item_value"><a href="https://send.monobank.ua/jar/2f98y1M3Gr" target="_blank">https://send.monobank.ua/jar/2f98y1M3Gr</a></div>
+                        </li>
+                        <li class="list__item">
+                            <h4 class="list__item_name">Card Number Monobank</h4>
+                            <div class="list__item_value">5375 4112 0060 0778</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -146,17 +342,18 @@
         <div class="container">
             <img class="footer__logo"src="icons/logo_svg.svg" alt="logo">
             <h2 class="footer__title" data-key="footerTitle"></h2>
-            <div class="footer__email">
+            <a href="mailto:info@advanceddefence.org" class="footer__email">
                 <img src="icons/email.svg" alt="email">
                 info@advanceddefence.org
-            </div>
+            </a>
             <div class="footer__links">
-                <a href="https://www.instagram.com/ua_drone_school/" class="footer__link"><img src="icons/instagram.svg" alt="instagram"></a>
-                <a href="https://www.facebook.com/profile.php?id=100083098792194" class="footer__link"><img src="icons/facebook.svg" alt="facebook"></a>
-                <a href="https://www.linkedin.com/company/advanced-defence/" class="footer__link"><img src="icons/linkedin.svg" alt="linkedin"></a>
+                <a href="https://www.instagram.com/ua_drone_school/" class="footer__link" target="_blank"><img src="icons/instagram.svg" alt="instagram"></a>
+                <a href="https://www.facebook.com/profile.php?id=100083098792194" class="footer__link" target="_blank"><img src="icons/facebook.svg" alt="facebook"></a>
+                <a href="https://www.linkedin.com/company/advanced-defence/" class="footer__link" target="_blank"><img src="icons/linkedin.svg" alt="linkedin"></a>
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="js/libs/custom-select.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
