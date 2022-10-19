@@ -4,55 +4,55 @@ tag.src = "https://www.youtube.com/iframe_api";
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-const videoElements = document.querySelectorAll('.support__video__wrapper div');
-const videoElements2 = document.querySelectorAll('.school__video__wrapper div');
+const videoElementsSupport = document.querySelectorAll('.support__video__wrapper div');
+const videoElementsSchool = document.querySelectorAll('.school__video__wrapper div');
 
-let player;
-let player2;
-let playerMobile;
-let playerMobile2;
+let playerSupport;
+let playerSchool;
+let playerSupportMobile;
+let playerSchoolMobile;
 
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
+  playerSupport = new YT.Player('player', {
     height: '464',
     width: '600',
     videoId: '-ggxuolcxeg',
     events: {
-        'onReady': onReady
+        'onReady': onReadySupport
     }
   });
 
-  player2 = new YT.Player('player2', {
+  playerSchool = new YT.Player('player2', {
     height: '317',
     width: '619',
     videoId: 'BkMZWW3AP0c',
     events: {
-        'onReady': onReady2
+        'onReady': onReadySchool
     }
   });
 
-  playerMobile = new YT.Player('playerMobile', {
+  playerSupportMobile = new YT.Player('playerMobile', {
     height: '211',
     width: '273',
     videoId: '-ggxuolcxeg',
     events: {
-        'onReady': onReady
+        'onReady': onReadySupport
     }
   });
 
-  playerMobile2 = new YT.Player('playerMobile2', {
+  playerSchoolMobile = new YT.Player('playerMobile2', {
     height: '166',
     width: '323',
     videoId: 'BkMZWW3AP0c',
     events: {
-        'onReady': onReady2
+        'onReady': onReadySchool
     }
   });
 }
 
-function onReady() {
-    player.addEventListener('onStateChange', function(e) {
-        videoElements.forEach(item => {
+function onReadySupport() {
+    playerSupport.addEventListener('onStateChange', function(e) {
+        videoElementsSupport.forEach(item => {
             if(e.data == '1') {
                 item.style.cssText = `opacity: 0; transition: .3s ease`;
             } else {
@@ -61,8 +61,8 @@ function onReady() {
             
         });
     });
-    playerMobile.addEventListener('onStateChange', function(e) {
-        videoElements.forEach(item => {
+    playerSupportMobile.addEventListener('onStateChange', function(e) {
+        videoElementsSupport.forEach(item => {
             if(e.data == '1') {
                 item.style.cssText = `opacity: 0; transition: .3s ease`;
             } else {
@@ -73,9 +73,9 @@ function onReady() {
     });
 }
 
-function onReady2() {
-    player2.addEventListener('onStateChange', function(e) {
-        videoElements2.forEach(item => {
+function onReadySchool() {
+    playerSchool.addEventListener('onStateChange', function(e) {
+        videoElementsSchool.forEach(item => {
             if(e.data == '1') {
                 item.style.cssText = `opacity: 0; transition: .3s ease`;
             } else {
@@ -85,8 +85,8 @@ function onReady2() {
         });
     });
 
-    playerMobile2.addEventListener('onStateChange', function(e) {
-        videoElements2.forEach(item => {
+    playerSchoolMobile.addEventListener('onStateChange', function(e) {
+        videoElementsSchool.forEach(item => {
             if(e.data == '1') {
                 item.style.cssText = `opacity: 0; transition: .3s ease`;
             } else {
